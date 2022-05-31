@@ -2,7 +2,6 @@ import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SignUp from "./pages/signUp/signUp";
-import Homepage from "./pages/homepage/homepage";
 import UserDetails from "./pages/userDetails/userDetails";
 import { useState } from "react";
 import PostJob from "./pages/postJob/postJob";
@@ -23,9 +22,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Homepage />}></Route>
         <Route
-          path="/signup"
+          path="/"
           element={<SignUp handleEmail={handleEmail} />}
         ></Route>
         <Route
