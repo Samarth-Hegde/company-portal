@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SignUp from "./pages/signUp/signUp";
+import Homepage from "./pages/homepage/homepage";
+import UserDetails from "./pages/userDetails/userDetails";
+import { useState } from "react";
+import PostJob from "./pages/postJob/postJob";
 
 function App() {
+  const [email, setEmail] = useState("");
+  const [companyName, setCompanyName] = useState("");
+
+  const handleEmail = (email) => {
+    setEmail(email);
+  };
+
+  const handleCompanyName = (companyName) => {
+    setCompanyName(companyName);
+    console.log(companyName);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage />}></Route>
+        <Route
+          path="/signup"
+          element={<SignUp handleEmail={handleEmail} />}
+        ></Route>
+        <Route
+          path="/userDetails"
+          element={
+            <UserDetails email={email} handleCompanyName={handleCompanyName} />
+          }
+        ></Route>
+        <Route
+          path="/postJob"
+          element={<PostJob companyName={companyName} />}
+        ></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
