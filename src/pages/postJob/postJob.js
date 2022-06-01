@@ -20,9 +20,14 @@ function PostJob(props) {
       fireBaseDataBase,
       `jobPortal/companies/companyDetails/${uid}/posts`
     );
-    await push(companyRef, data);
-    const jobPostRef = ref(fireBaseDataBase, `jobPortal/allPosts`);
-    await push(jobPostRef, data);
+    if (Object.values(data).length < 8) {
+      alert("All fields are required");
+    } else {
+      alert("Successfully uploaded");
+      await push(companyRef, data);
+      const jobPostRef = ref(fireBaseDataBase, `jobPortal/allPosts`);
+      await push(jobPostRef, data);
+    }
   };
   useEffect(() => {
     onAuthStateChanged(fireBaseAuthentication, (user) => {
@@ -51,10 +56,11 @@ function PostJob(props) {
       />
       <TextField
         id="outlined-basic"
-        label="Package"
+        label="Package (LPA)"
         variant="outlined"
         sx={{ marginBottom: 2, width: 500 }}
         name="package"
+        type="number"
         onChange={handleChange}
       />
       <TextField
@@ -63,6 +69,7 @@ function PostJob(props) {
         variant="outlined"
         sx={{ marginBottom: 2, width: 500 }}
         name="location"
+        type="number"
         onChange={handleChange}
       />
       <TextField
@@ -71,6 +78,7 @@ function PostJob(props) {
         variant="outlined"
         sx={{ marginBottom: 2, width: 500 }}
         name="cutoff10th"
+        type="number"
         onChange={handleChange}
       />
       <TextField
@@ -79,6 +87,7 @@ function PostJob(props) {
         variant="outlined"
         sx={{ marginBottom: 2, width: 500 }}
         name="cutoff12th"
+        type="number"
         onChange={handleChange}
       />
       <TextField
@@ -87,6 +96,7 @@ function PostJob(props) {
         variant="outlined"
         sx={{ marginBottom: 2, width: 500 }}
         name="cutoffSem"
+        type="number"
         onChange={handleChange}
       />
       <TextField
@@ -95,6 +105,7 @@ function PostJob(props) {
         variant="outlined"
         sx={{ marginBottom: 2, width: 500 }}
         name="currentCgpaCutoff"
+        type="number"
         onChange={handleChange}
       />
       <Button variant="contained" onClick={handleClick}>
